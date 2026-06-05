@@ -1,0 +1,4 @@
+data/
+compose.yaml
+DOCKERFILE
+__pycache__/
