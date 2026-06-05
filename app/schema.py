@@ -6,6 +6,7 @@ def create_schema():
     conn.executescript("""
     CREATE TABLE IF NOT EXISTS runs (
         id INTEGER PRIMARY KEY,
+        user_id TEXT NOT NULL,
         run_date TEXT NOT NULL,
         run_type TEXT,
         start_time TEXT,

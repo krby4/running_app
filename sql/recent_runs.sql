@@ -1,0 +1,1 @@
+SELECT * FROM runs ORDER BY run_date DESC LIMIT :limit

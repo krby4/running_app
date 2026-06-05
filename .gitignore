@@ -1,4 +1,5 @@
 data/
+/data_import
 compose.yaml
 DOCKERFILE
 __pycache__/

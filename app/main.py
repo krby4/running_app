@@ -2,7 +2,9 @@
 from cli import parse_args
 from schema import create_schema
 import runs
+import pathlib
 import reports
+import import_workouts
 
 def main():
     args = parse_args()
@@ -14,11 +16,18 @@ def main():
         if args.add_mode == "csv":
             run = runs.validate_csv(args.csv_text)
         elif args.add_mode == "manual":
-            run = runs.validate_manual(args)
-        runs.insert_run(run)
+            run = runs.validate_manual(
+                args.date,args.start,args.end,
+                args.run_type,args.duration,args.distance,
+                args.ave_hr,args.max_hr,args.rpe,args.notes)
+        runs.insert_run(run,args.user_id)
         print("Run inserted")
-    elif args.mode == "stats":
-        stat_mode = args.stat_mode
+    elif args.mode == "import-data":
+        path = pathlib.Path(args.path)
+        if path.suffix == ".csv":
+            import_workouts.import_csv(path,args.user_id)
+        else:
+            print("No other imports working yet")
     elif args.mode == "list":
         list_mode = args.list_mode
         if list_mode == "recent":
@@ -30,16 +39,16 @@ def main():
         else:
             print("List not found")
     elif args.mode == "summary":
-        if args.summary_mode == "weekly":
-            print("Will implement")
-        elif args.summary_mode == "monthly":
-            reports.monthly_summary(args.month)
+        if args.summary_mode == "monthly":
+             reports.print_cursor_results(reports.monthly_summary(args.month))
         elif args.summary_mode == "yearly":
-            print("Will implement")
-        elif args.summary_mode == "max":
-            print("Will implement")
+            reports.print_cursor_results(reports.yearly_summary(args.year))
         elif args.summary_mode == "type":
-            reports.run_type(args.month)
+            reports.print_cursor_results(reports.run_type(args.month))
+        elif args.summary_mode == "max":
+            reports.print_cursor_results(reports.max_runs(args.period))
+        elif args.summary_mode == "weekly":
+            print("Will implement")
     else:
         print(f"Mode not found: {mode}")
 

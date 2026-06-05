@@ -9,7 +9,7 @@ def validate_timestamp(time):
             return datetime.strptime(time,fmt)
         except ValueError:
             pass
-        raise ValueError(f"Could not parse time: {time}")
+    raise ValueError(f"Could not parse time: {time}")
 
 def calculate_duration_minutes(run_date, start_time, end_time):
     end_dt = validate_timestamp(f"{run_date} {end_time}")
@@ -30,23 +30,23 @@ def validate_csv(csv_text):
     run["rpe"] = int(run["rpe"])
     return run
 
-def validate_manual(args):
-    duration = calculate_duration_minutes(args.date, args.start, args.end)
-    # (datetime.strptime(f"{args.date} {args.end}","%Y-%m-%d %H:%M") - datetime.strptime(f"{args.date} {args.start}","%Y-%m-%d %H:%M")).total_seconds() / 60
-    run = {"run_date" : args.date,
-        "start_time" : args.start,
-        "end_time" : args.end,
-        "run_type" : args.type,
+def validate_manual(date,start=None,end=None,run_type=None,duration=None,distance=None,ave_hr=None,max_hr=None,rpe=None,notes=None):
+    if duration is None and start and end:
+        duration = calculate_duration_minutes(date, start, end)
+    run = {"run_date" : date,
+        "start_time" : start,
+        "end_time" : end,
+        "run_type" : run_type,
         "duration_minutes" : duration,
-        "distance_miles" : args.distance,
-        "ave_hr" : args.ave_hr,
-        "max_hr" : args.max_hr,
-        "rpe" : args.rpe,
-        "notes" : args.notes}
+        "distance_miles" : distance,
+        "ave_hr" : ave_hr,
+        "max_hr" : max_hr,
+        "rpe" : rpe,
+        "notes" : notes}
 
     return run
 
-def insert_run(run):
+def insert_run(run,user_id):
 
     conn = get_connection()
     conn.execute("""
@@ -60,9 +60,10 @@ INSERT INTO runs (
                 ave_hr,
                 max_hr,
                 rpe,
-                notes
+                notes,
+                user_id
                 )
-                VALUES (?,?,?,?,?,?,?,?,?,?)
+                VALUES (?,?,?,?,?,?,?,?,?,?,?)
 """,(
         run["run_date"],
         run["start_time"],
@@ -73,7 +74,8 @@ INSERT INTO runs (
         run["ave_hr"],
         run["max_hr"],
         run["rpe"],
-        run["notes"]
+        run["notes"],
+        user_id
     )
 )
     conn.commit()

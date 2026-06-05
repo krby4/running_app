@@ -1,0 +1,1 @@
+SELECT * FROM runs ORDER BY duration_minutes DESC LIMIT :limit
