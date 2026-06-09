@@ -1,0 +1,25 @@
+{% if rows %}
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    {% for header in rows[0].keys() %}
+                        <th>{{ header }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for row in rows %}
+                    <tr>
+                        {% for header in rows[0].keys() %}
+                            <td>{{ row[header] }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% else %}
+    <p class="empty">No results found.</p>
+{% endif %}

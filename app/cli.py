@@ -2,7 +2,7 @@ import argparse
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Running db command line tool")
-    parser.add_argument("-u","--user-id",help="User id of insert",default="keith")
+    # parser.add_argument("-u","--user-id",help="User id of insert",default="keith")
     subparsers = parser.add_subparsers(dest="mode",required=True)
     subparsers.add_parser("init-db",help="Initializes the database")
     add_parser = subparsers.add_parser("add-run",help="Adds a run")
@@ -36,6 +36,8 @@ def parse_args():
     summary_parser.add_argument("--week",help="Shows only x weeks, default = 5",type=int,default=5)
     summary_parser.add_argument("-p","--period",help="Time period to sort by",type=int,default=None)
     # shared
+    for sub in [add_parser,list_parser,import_parser,stats_parser,summary_parser]:
+        sub.add_argument("-u","--user-id",help="User id of insert",default="keith")
     for sub in [list_parser,stats_parser]:
         sub.add_argument("--top",help="Top x for stats",type=int,default=10)
     

@@ -8,6 +8,7 @@ SELECT
     ROUND(MAX(distance_miles), 2) as longest_distance_run,
     ROUND(MAX(duration_minutes), 2) as longest_time_run
 FROM runs
-WHERE (:month IS NULL OR substr(run_date, 1, 7) = :month)
+WHERE user_id = :user_id 
+AND (:month IS NULL OR substr(run_date, 1, 7) = :month)
 GROUP BY substr(run_date,1,7)
 ORDER BY month DESC;

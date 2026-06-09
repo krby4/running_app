@@ -23,34 +23,34 @@ def run_query(query, params=()):
     conn.close()
     return results
 
-def recent_runs(limit):
+def recent_runs(user_id,limit=10):
     query = load_query("recent_runs.sql")
-    results = run_query(recent_runs,(limit,))
-    print_cursor_results(results)
+    return run_query(query,(user_id,limit)) 
+    # print_cursor_results(results)
 
 def longest_distance_runs(limit):
-    results = run_query("SELECT * FROM runs ORDER BY distance_miles DESC LIMIT ?",(limit,))
-    print_cursor_results(results)
+    return run_query("SELECT * FROM runs ORDER BY distance_miles DESC LIMIT ?",(limit,))
+    # print_cursor_results(results)
 
 def longest_duration_runs(limit):
-    results = run_query("SELECT * FROM runs ORDER BY duration_minutes DESC LIMIT ?",(limit,))
-    print_cursor_results(results)
+    return run_query("SELECT * FROM runs ORDER BY duration_minutes DESC LIMIT ?",(limit,))
+    # print_cursor_results(results)
 
 # monthly stats
-def monthly_summary(month=None):
-    return run_query(load_query("monthly_summary.sql"), {"month": month})
+def monthly_summary(user_id,month=None):
+    return run_query(load_query("monthly_summary.sql"), {"month": month,"user_id": user_id})
 
-def yearly_summary(year=None):
-    return run_query(load_query("yearly_summary.sql"),{"year": year})
+def yearly_summary(user_id,year=None):
+    return run_query(load_query("yearly_summary.sql"),{"year": year,"user_id": user_id})
 
-def run_type(month=None):
-    return run_query(load_query("run_type.sql"), {"month": month})
+def run_type(user_id,month=None):
+    return run_query(load_query("run_type.sql"), {"month": month,"user_id": user_id})
     
-def max_runs(period=None):
-    return run_query(load_query("max_runs.sql"), {"period": period})
+def max_runs(user_id,period=None):
+    return run_query(load_query("max_runs.sql"), {"period": period,"user_id": user_id})
 
 def weekly_summary(week,month):
-    results = run_query("""
+    return run_query("""
     SELECT
         substr(run_date,1,7) AS month,
         COUNT(*) as run_count,
@@ -65,4 +65,4 @@ def weekly_summary(week,month):
     GROUP BY substr(run_date,1,7)
     ORDER BY month DESC;
     """, (month,month))
-    print_cursor_results(results)
+    # print_cursor_results(results)

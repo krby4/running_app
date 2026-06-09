@@ -1,0 +1,127 @@
+body {
+    margin: 0;
+    font-family: system-ui, sans-serif;
+    background: #f4f6f8;
+    color: #1f2933;
+    font-size: 14px;
+}
+
+.page {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.hero {
+    margin-bottom: 0.75rem;
+}
+
+.hero h1 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.hero p {
+    margin: 0.25rem 0 0;
+}
+
+.card {
+    background: white;
+    border-radius: 8px;
+    padding: 0.75rem;
+    margin-bottom: 0.75rem;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.card h2 {
+    margin: 0 0 0.5rem;
+    font-size: 1rem;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}
+
+.wide {
+    grid-column: 1 / -1;
+}
+
+.filter-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: end;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    font-weight: 600;
+    gap: 0.2rem;
+}
+
+input,
+select,
+button {
+    padding: 0.35rem 0.45rem;
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    border-radius: 6px;
+    background: #2563eb;
+    color: white;
+    padding: 0.45rem 0.75rem;
+}
+
+button:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+}
+
+.table-wrap {
+    overflow-x: auto;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.78rem;
+}
+
+th,
+td {
+    padding: 0.35rem 0.45rem;
+    border-bottom: 1px solid #e5e7eb;
+    text-align: left;
+    white-space: nowrap;
+}
+
+th {
+    position: sticky;
+    top: 0;
+    background: #f9fafb;
+    font-weight: 700;
+}
+
+.empty {
+    color: #6b7280;
+    font-style: italic;
+    margin: 0;
+}
+
+.muted {
+    opacity: 0.75;
+}
+
+@media (max-width: 900px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}

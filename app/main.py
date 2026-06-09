@@ -31,11 +31,11 @@ def main():
     elif args.mode == "list":
         list_mode = args.list_mode
         if list_mode == "recent":
-            reports.recent_runs(args.top)
+            reports.print_cursor_results(reports.recent_runs(args.user_id,args.top))
         elif list_mode == "long-dist":
-            reports.longest_distance_runs(args.top)
+            reports.print_cursor_results(reports.longest_distance_runs(args.top))
         elif list_mode == "long-time":
-            reports.longest_duration_runs(args.top)
+            reports.print_cursor_results(reports.longest_duration_runs(args.top))
         else:
             print("List not found")
     elif args.mode == "summary":

@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+    <title>Recent Runs</title>
+</head>
+<body>
+    <h1>Recent Runs for {{ user_id }}</h1>
+
+    {% if rows %}
+        <table border="1">
+            <tr>
+                <th>Date</th>
+                <th>Type</th>
+                <th>Distance</th>
+                <th>Duration</th>
+                <th>Avg HR</th>
+                <th>Max HR</th>
+                <th>RPE</th>
+                <th>Notes</th>
+            </tr>
+
+            {% for row in rows %}
+            <tr>
+                <td>{{ row["run_date"] }}</td>
+                <td>{{ row["run_type"] }}</td>
+                <td>{{ row["distance_miles"] }}</td>
+                <td>{{ row["duration_minutes"] }}</td>
+                <td>{{ row["ave_hr"] }}</td>
+                <td>{{ row["max_hr"] }}</td>
+                <td>{{ row["rpe"] }}</td>
+                <td>{{ row["notes"] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No runs found for this user.</p>
+    {% endif %}
+</body>
+</html>

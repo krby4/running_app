@@ -1,10 +1,13 @@
 import sqlite3
 import pathlib
+import os
 
 # make directory if it doesn't exist
 BASE_DIR = pathlib.Path(__file__).resolve().parent
-DEFAULT_DB_PATH = BASE_DIR.parent / "data" / "running.db"
-def get_connection(db_path=DEFAULT_DB_PATH):
+DEFAULT_DB_PATH = pathlib.Path(os.environ.get("RUNNING_DB_PATH", str(BASE_DIR.parent / "data" / "running.db"))) 
+def get_connection(db_path=None):
+    if db_path is None:
+        db_path = DEFAULT_DB_PATH
     db_path.parent.mkdir(
         parents=True,
         exist_ok=True

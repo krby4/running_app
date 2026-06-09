@@ -4,6 +4,7 @@ SELECT substr(run_date,1,7) AS month,
     ROUND(SUM(distance_miles), 2) as total_miles,
     ROUND(SUM(duration_minutes) / 60, 2) as total_hours
 FROM runs
-WHERE (:month is NULL or substr(run_date, 1, 7) = :month)
+WHERE user_id = :user_id
+AND (:month is NULL or substr(run_date, 1, 7) = :month)
 GROUP BY substr(run_date, 1, 7), run_type
 ORDER BY run_count DESC;

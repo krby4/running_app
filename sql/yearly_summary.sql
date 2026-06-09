@@ -8,6 +8,7 @@ SELECT
     ROUND(MAX(distance_miles), 2) as longest_distance_run,
     ROUND(MAX(duration_minutes), 2) as longest_time_run
 FROM runs
-WHERE (:year IS NULL OR substr(run_date, 1, 4) = :year)
+WHERE user_id = :user_id
+AND (:year IS NULL OR substr(run_date, 1, 4) = :year)
 GROUP BY substr(run_date,1,4)
 ORDER BY year DESC;
