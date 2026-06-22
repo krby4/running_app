@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Add Run</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <main class="page">
+        <div class="card narrow">
+
+            <h1>Add Run</h1>
+
+            <p>
+                User:
+                <strong>{{ user_id }}</strong>
+            </p>
+
+            <form method="post" class="run-form">
+
+                <label>
+                    Date
+                    <input
+                        type="date"
+                        name="date"
+                        required
+                    >
+                </label>
+
+                <label>
+                    Start Time
+                    <input
+                        type="time"
+                        name="start"
+                    >
+                </label>
+
+                <label>
+                    End Time
+                    <input
+                        type="time"
+                        name="end"
+                    >
+                </label>
+
+                <label>
+                    Duration (minutes)
+                    <input
+                        type="number"
+                        step="0.1"
+                        name="duration"
+                    >
+                </label>
+
+                <label>
+                    Run Type
+                    <select name="run_type" required>
+                        <option value="Easy">Easy</option>
+                        <option value="Aerobic">Aerobic</option>
+                        <option value="Threshold">Threshold</option>
+                        <option value="Long">Long</option>
+                        <option value="Race">Race</option>
+                    </select>
+                </label>
+
+                <label>
+                    Distance (miles)
+                    <input
+                        type="number"
+                        step="0.01"
+                        name="distance"
+                    >
+                </label>
+
+                <label>
+                    Average HR
+                    <input
+                        type="number"
+                        name="ave_hr"
+                    >
+                </label>
+
+                <label>
+                    Max HR
+                    <input
+                        type="number"
+                        name="max_hr"
+                    >
+                </label>
+
+                <label>
+                    RPE
+                    <input
+                        type="number"
+                        min="0"
+                        max="10"
+                        name="rpe"
+                    >
+                </label>
+
+                <label>
+                    Notes
+                    <textarea
+                        name="notes"
+                        rows="5"
+                    ></textarea>
+                </label>
+
+                <div class="button-row">
+                    <button type="submit">
+                        Add Run
+                    </button>
+
+                    <a
+                        class="secondary-button"
+                        href="{{ url_for('user_home', user_id=user_id) }}"
+                    >
+                        Cancel
+                    </a>
+                </div>
+
+            </form>
+
+        </div>
+    </main>
+</body>
+</html>

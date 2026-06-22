@@ -1,5 +1,7 @@
 data/
 /data_import
 compose.yaml
-DOCKERFILE
+Dockerfile
+.env
+/venv
 __pycache__/

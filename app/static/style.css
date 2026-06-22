@@ -126,3 +126,36 @@ th {
         grid-template-columns: 1fr;
     }
 }
+
+.narrow {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.run-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.run-form textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.button-row {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+}
+
+.secondary-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.45rem 0.75rem;
+    text-decoration: none;
+    border-radius: 6px;
+    background: #6b7280;
+    color: white;
+}
