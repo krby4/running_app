@@ -42,7 +42,7 @@ def is_admin():
 #     else:
 #         return False
 
-def can_add_run(user_id):
+def can_access_user(user_id):
     username = get_username()
     if not username:
         return False

@@ -50,6 +50,8 @@ def hello():
 
 @app.route("/user/<user_id>", methods=["GET"])
 def user_home(user_id):
+    if not auth.can_access_user(user_id):
+        abort(403)
     now = datetime.now()
     current_month_string = now.strftime("%Y-%m")
     current_year_string = now.strftime("%Y")
@@ -79,7 +81,7 @@ def user_home(user_id):
 
 @app.route("/user/<user_id>/add-run", methods=["GET","POST"])
 def add_run(user_id):
-    if not auth.can_add_run(user_id):
+    if not auth.can_access_user(user_id):
         abort(403)
     if request.method == "GET":
         return render_template("add_run.html", user_id=user_id)
