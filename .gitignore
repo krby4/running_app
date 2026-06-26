@@ -1,7 +1,6 @@
 data/
 /data_import
-compose.yaml
-Dockerfile
 .env
 /venv
 __pycache__/
+*.db

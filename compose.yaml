@@ -1,0 +1,13 @@
+services:
+  run_website:
+    build: .
+    container_name: dev_run_website
+    ports:
+      - "5002:5000"
+    restart: unless-stopped
+    volumes:
+      - ./data:/data
+    environment:
+      RUNNING_DB_PATH: /data/running.db
+    env_file:
+      - .env
